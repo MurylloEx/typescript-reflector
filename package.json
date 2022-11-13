@@ -1,0 +1,42 @@
+{
+  "name": "typescript-reflector",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "author": "Muryllo Pimenta de Oliveira",
+  "license": "MIT",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "rimraf ./dist && tsc && tsc-alias",
+    "build": "rimraf ./dist && tsc && tsc-alias",
+    "start": "ts-node -r tsconfig-paths/register src/index.ts",
+    "test": "rimraf ./dist && tsc && tsc-alias && jest",
+    "test:cov": "rimraf ./dist && tsc && tsc-alias && jest --coverage",
+    "test:watch": "rimraf ./dist && tsc && tsc-alias && jest --watch",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
+    "@types/node": "^14.18.33",
+    "@types/jest": "28.1.4",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^8.0.1",
+    "jest": "28.1.2",
+    "rimraf": "^3.0.2",
+    "ts-jest": "28.0.5",
+    "ts-node": "^10.9.1",
+    "tsc-alias": "^1.7.0",
+    "tsconfig-paths": "^4.1.0",
+    "typescript": "^4.8.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
