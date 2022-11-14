@@ -4,7 +4,7 @@ import {
   MethodReflector,
   PropertyReflector,
   Reflector
-} from 'src/lib';
+} from 'src';
 
 class TestingClass {}
 

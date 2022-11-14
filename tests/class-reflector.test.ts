@@ -1,4 +1,4 @@
-import { ClassReflector, Instantiable } from 'src/lib';
+import { ClassReflector, Instantiable } from 'src';
 
 class Token { }
 

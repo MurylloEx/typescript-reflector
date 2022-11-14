@@ -1,4 +1,4 @@
-import { AbstractReflector, Instance, Instantiable } from 'src/lib';
+import { AbstractReflector, Instance, Instantiable } from 'src';
 
 class TestingClass {}
 

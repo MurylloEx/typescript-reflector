@@ -16,11 +16,10 @@ export class PropertyReflector<T> extends AbstractReflector<T> {
   }
 
   getOwnNames(): string[] {
-    if (this.isClass())
-      return Object.getOwnPropertyNames(this.getClass());
+    let ownNames: string[] = Object.getOwnPropertyNames(this.getTarget());
     if (this.isInstance())
-      return Object.getOwnPropertyNames(this.getInstance());
-    return [];
+      ownNames = ownNames.concat(Object.getOwnPropertyNames(this.getInstance()));
+    return ownNames;
   }
 
   getNames(): string[] {
