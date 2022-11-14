@@ -1,8 +1,12 @@
 {
   "name": "typescript-reflector",
   "version": "1.0.0",
-  "description": "",
+  "description": "Typescript Reflector",
   "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MurylloEx/typescript-reflector"
+  },
   "author": "Muryllo Pimenta de Oliveira",
   "license": "MIT",
   "main": "index.js",
@@ -11,8 +15,8 @@
     "build": "rimraf ./dist && tsc && tsc-alias",
     "start": "ts-node -r tsconfig-paths/register src/index.ts",
     "test": "rimraf ./dist && tsc && tsc-alias && jest",
-    "test:cov": "rimraf ./dist && tsc && tsc-alias && jest --coverage",
-    "test:watch": "rimraf ./dist && tsc && tsc-alias && jest --watch",
+    "test:cov": "tsc && tsc-alias && jest --coverage",
+    "test:watch": "tsc && tsc-alias && jest --watch",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
   },
   "dependencies": {

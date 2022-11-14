@@ -6,9 +6,9 @@ import {
   Reflector
 } from 'src/lib';
 
+class TestingClass {}
+
 describe('Test result of Reflector methods', () => {
-  
-  class TestingClass {}
 
   test('Test if fromClass() method return an instance of Reflector', () => {
     const reflector = Reflector.fromClass(TestingClass);

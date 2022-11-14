@@ -4,25 +4,29 @@ const config: Config.InitialOptions = {
   verbose: true,
   silent: true,
   preset: 'ts-jest',
+  modulePaths: ['<rootDir>'],
   moduleDirectories: ['src', 'node_modules'],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json'
-    }
-  },
+  modulePathIgnorePatterns: [
+    '^.+\\.d\\.ts$',
+    '^.+\\.config\\.ts$'
+  ],
   moduleFileExtensions: [
     'js',
     'json',
     'ts'
   ],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json'
+    }
+  },
   rootDir: './',
-  modulePaths: ['<rootDir>'],
   testRegex: '(.*\\.test\\.ts)$',
   transform: {
     '^.+\\.(t|j)s$': 'ts-jest'
   },
   collectCoverageFrom: [
-    '**/*.(t|j)s'
+    '**/*.ts'
   ],
   coverageDirectory: './coverage',
   testEnvironment: 'node'

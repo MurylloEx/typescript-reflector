@@ -16,7 +16,11 @@ export class PropertyReflector<T> extends AbstractReflector<T> {
   }
 
   getOwnNames(): string[] {
-    return Object.getOwnPropertyNames(this.getTarget());
+    if (this.isClass())
+      return Object.getOwnPropertyNames(this.getClass());
+    if (this.isInstance())
+      return Object.getOwnPropertyNames(this.getInstance());
+    return [];
   }
 
   getNames(): string[] {
