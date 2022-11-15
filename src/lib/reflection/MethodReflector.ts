@@ -46,6 +46,10 @@ export class MethodReflector<T> extends AbstractReflector<T> {
       return stubMethod.apply(this, arguments);
     }
 
+    Object.defineProperty(prototype[name], 'name', {
+      value: name
+    });
+
     return this;
   }
 
