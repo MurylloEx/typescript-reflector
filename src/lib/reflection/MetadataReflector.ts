@@ -75,9 +75,9 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
   }
 
   firstOrFail<K>(key: string = 'default'): Metadata<K> {
-    const result = this.first<K>(key);
+    const firstMetadata = this.first<K>(key);
 
-    if (result) return result;
+    if (firstMetadata) return firstMetadata;
 
     throw new ReferenceError('Cannot find first metadata');
   }
@@ -91,7 +91,7 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
 
     if (lastMetadata) return lastMetadata;
 
-    throw new ReferenceError('Cannot find first metadata');
+    throw new ReferenceError('Cannot find last metadata');
   }
   
   take<K>(amount: number, key: string = 'default'): Metadata<K>[] {
@@ -108,6 +108,10 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
 
   isNotEmpty(key: string = 'default'): boolean {
     return !this.isEmpty(key);
+  }
+
+  clear(key: string = 'default'): MetadataReflector<T> {
+    return this.set(key, []);
   }
 
 }
