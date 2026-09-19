@@ -49,9 +49,10 @@ export class PropertyReflector<T> extends AbstractReflector<T> {
     return this;
   }
 
-  inject<K>(propertyName: string, value: K | K[]) {
+  inject<K>(propertyName: string, value: K | K[]): PropertyReflector<T> {
     const target = this.getTarget();
     target[propertyName] = value;
+    return this;
   }
 
 }

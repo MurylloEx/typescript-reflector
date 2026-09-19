@@ -32,11 +32,7 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
 
     previousMetadata[key] = metadata;
 
-    if (this.classValue)
-      Reflect.defineMetadata(this.namespaceValue, previousMetadata, this.classValue);
-
-    if (this.instanceValue)
-      Reflect.defineMetadata(this.namespaceValue, previousMetadata, this.instanceValue.prototype);
+    Reflect.defineMetadata(this.namespaceValue, previousMetadata, this.getTarget());
   }
 
   protected get<K>(key: string): Metadata<K>[] {
@@ -83,7 +79,7 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
   }
 
   last<K>(key: string = 'default'): Metadata<K> | null {
-    return this.all<K>(key).slice(-1)[0] ?? null;;
+    return this.all<K>(key).slice(-1)[0] ?? null;
   }
 
   lastOrFail<K>(key: string = 'default'): Metadata<K> {
@@ -91,7 +87,7 @@ export class MetadataReflector<T> extends AbstractReflector<T> {
 
     if (lastMetadata) return lastMetadata;
 
-    throw new ReferenceError('Cannot find first metadata');
+    throw new ReferenceError('Cannot find last metadata');
   }
   
   take<K>(amount: number, key: string = 'default'): Metadata<K>[] {

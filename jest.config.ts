@@ -1,35 +1,25 @@
-import type { Config } from '@jest/types';
+import type { Config } from 'jest';
 
-const config: Config.InitialOptions = {
+const config: Config = {
   verbose: true,
-  silent: true,
   preset: 'ts-jest',
-  modulePaths: ['<rootDir>'],
-  moduleDirectories: ['src', 'node_modules'],
-  modulePathIgnorePatterns: [
-    '^.+\\.d\\.ts$',
-    '^.+\\.config\\.ts$'
-  ],
-  moduleFileExtensions: [
-    'js',
-    'json',
-    'ts'
-  ],
-  globals: {
-    'ts-jest': {
-      tsconfig: 'tsconfig.json'
-    }
+  testEnvironment: 'node',
+  roots: ['<rootDir>/tests'],
+  testMatch: ['**/*.test.ts'],
+  moduleNameMapper: {
+    '^src/(.*)$': '<rootDir>/src/$1',
   },
-  rootDir: './',
-  testRegex: '(.*\\.test\\.ts)$',
   transform: {
-    '^.+\\.(t|j)s$': 'ts-jest'
+    '^.+\\.tsx?$': [
+      'ts-jest',
+      {
+        tsconfig: 'tsconfig.jest.json',
+      },
+    ],
   },
-  collectCoverageFrom: [
-    '**/*.ts'
-  ],
-  coverageDirectory: './coverage',
-  testEnvironment: 'node'
+  collectCoverageFrom: ['src/**/*.ts', '!src/**/index.ts'],
+  coverageDirectory: 'coverage',
+  coverageReporters: ['text', 'lcov'],
 };
 
 export default config;

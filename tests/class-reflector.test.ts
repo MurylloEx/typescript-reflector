@@ -1,4 +1,4 @@
-import { ClassReflector, Instantiable } from 'src/lib';
+import { ClassReflector } from 'src/lib';
 
 class Token { }
 
@@ -25,7 +25,7 @@ describe('Test result of ClassReflector methods', () => {
 
   test('Test if getParentClasses() method return the parent classes', () => {
     const reflector = ClassReflector.fromClass(E);
-    expect(reflector.getParentClasses<Instantiable<any>>()).toStrictEqual([E, D, C, B, A]);
+    expect(reflector.getParentClasses()).toStrictEqual([E, D, C, B, A]);
   });
 
   test('Test if getParams() method return the constructor injection tokens', () => {

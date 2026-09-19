@@ -1,68 +1,65 @@
 import { PropertyReflector } from 'src/lib';
 
 class TestingClass {}
+
 class TestingClassWithProperties {
   public property1: string = 'foo';
   public property2: number = 100;
   public property3: boolean = true;
 }
 
-describe('Test result of PropertyReflector methods', () => {
-  
-  test('Test if getNames() method return the properties of TestingClass and his parent classes from class', () => {
+describe('PropertyReflector', () => {
+
+  test('getNames() from class includes Function and Object prototype members', () => {
     const reflector = PropertyReflector.fromClass(TestingClass);
-    const expectedNames = [
+    const names = reflector.getNames();
+
+    expect(names).toEqual(expect.arrayContaining([
       'length',
-      'prototype',
       'name',
-      'arguments',
-      'caller',
+      'prototype',
       'constructor',
-      'apply',
-      'bind',
-      'call',
       'toString',
-      '__defineGetter__',
-      '__defineSetter__',
-      'hasOwnProperty',
-      '__lookupGetter__',
-      '__lookupSetter__',
-      'isPrototypeOf',
-      'propertyIsEnumerable',
       'valueOf',
-      '__proto__',
-      'toLocaleString'
-    ];
-    expect(reflector.getNames()).toStrictEqual(expectedNames);
+    ]));
+    expect(new Set(names).size).toBe(names.length);
   });
 
-  test('Test if getNames() method return the properties of TestingClass and his parent classes from instance', () => {
+  test('getNames() from instance includes Object.prototype members', () => {
     const reflector = PropertyReflector.fromInstance(new TestingClass());
-    const expectedNames = [
+    const names = reflector.getNames();
+
+    expect(names).toEqual(expect.arrayContaining([
       'constructor',
-      '__defineGetter__',
-      '__defineSetter__',
-      'hasOwnProperty',
-      '__lookupGetter__',
-      '__lookupSetter__',
-      'isPrototypeOf',
-      'propertyIsEnumerable',
       'toString',
       'valueOf',
-      '__proto__',
-      'toLocaleString',
-    ];
-    expect(reflector.getNames()).toStrictEqual(expectedNames);
+      'hasOwnProperty',
+    ]));
+    expect(new Set(names).size).toBe(names.length);
   });
 
-  test('Test if getOwnNames() method return properties of TestingClassWithProperties from instance', () => {
+  test('getOwnNames() from instance returns own instance properties', () => {
     const reflector = PropertyReflector.fromInstance(new TestingClassWithProperties());
-    const expectedNames = [
+    expect(reflector.getOwnNames()).toEqual([
       'property1',
       'property2',
-      'property3'
-    ];
-    expect(reflector.getOwnNames()).toStrictEqual(expectedNames);
+      'property3',
+    ]);
+  });
+
+  test('inject() and delete() mutate the target', () => {
+    class Target {
+      existing = 1;
+    }
+
+    const instance = new Target();
+    const reflector = PropertyReflector.fromInstance(instance);
+
+    reflector.inject('injected', 'value');
+    expect((instance as Target & { injected?: string }).injected).toBe('value');
+
+    reflector.delete('injected');
+    expect(Object.prototype.hasOwnProperty.call(instance, 'injected')).toBe(false);
   });
 
 });

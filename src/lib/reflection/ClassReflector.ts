@@ -15,10 +15,10 @@ export class ClassReflector<T> extends AbstractReflector<T> {
     return new ClassReflector<T>().withInstance(instanceValue);
   }
 
-  getParentClasses<Function>(): Function[] {
-    const prototypes: Function[] = [];
+  getParentClasses<K = Instantiable<unknown>>(): K[] {
+    const prototypes: K[] = [];
 
-    let prototype: any = this.isClass() 
+    let prototype: any = this.isClass()
       ? this.getClass()
       : Object.getPrototypeOf(this.getInstance());
 
@@ -29,7 +29,7 @@ export class ClassReflector<T> extends AbstractReflector<T> {
 
     prototypes.splice(-2);
 
-    return <Function[]>prototypes;
+    return prototypes;
   }
 
   getParentClass<K>(): K {

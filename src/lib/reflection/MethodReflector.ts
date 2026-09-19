@@ -42,9 +42,9 @@ export class MethodReflector<T> extends AbstractReflector<T> {
       ? this.getClass().prototype 
       : Object.getPrototypeOf(this.getInstance());
 
-    prototype[name] = function() {
-      return stubMethod.apply(this, arguments);
-    }
+    prototype[name] = function (this: unknown, ...args: unknown[]) {
+      return stubMethod.apply(this, args);
+    };
 
     return this;
   }
