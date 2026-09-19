@@ -30,7 +30,7 @@ You can also construct the specialized reflectors directly when you only need on
 
 ## Requirements
 
-- Node.js **18+**
+- Node.js **22+** (CI also covers 24 and 26)
 - TypeScript projects that use `experimentalDecorators` and `emitDecoratorMetadata` when you need design-time metadata (`design:paramtypes`, etc.)
 
 ## Install
